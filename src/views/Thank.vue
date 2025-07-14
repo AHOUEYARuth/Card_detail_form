@@ -3,7 +3,7 @@
         <div class="lateral_bar">
             <div class="info_card" v-for="item in mesDonnees.userTab">
                 <img src="/src/assets/card-logo.svg" alt="">
-                <p id="nbr">{{ item.cardNuber }}</p>
+                <p id="nbr">{{ item.cardNumber }}</p>
                 <div class="user">
                     <p>{{ item.name }}</p>
                     <p>{{ item.month }} / {{ item.year }}</p>
@@ -26,17 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import { useDataStore } from "../store/data";
+import { useDataStore } from "../store/data.ts";
 const mesDonnees = useDataStore()
-const resetForm = () => {
+/* const resetForm = () => {
   mesDonnees.data.name = "";
-  mesDonnees.data.cardNuber = "";
+  mesDonnees.data.cardNumber = "";
   mesDonnees.data.month = "";
   mesDonnees.data.year = "";
   mesDonnees.data.cvc = "";
   mesDonnees.blankCard = "";
   mesDonnees.invalableCardN = "";
-};
+}; */
 </script>
 
 <style scoped>

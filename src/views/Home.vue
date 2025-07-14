@@ -4,9 +4,9 @@
       <div class="card_back" v-for="i in mesDonnees.userTab" :key="i.cvc">
         <span>{{ i.cvc }}</span>
       </div>
-      <div class="info_card" v-for="item in mesDonnees.userTab" :key="item.cardNuber">
+      <div class="info_card" v-for="item in mesDonnees.userTab" :key="item.cardNumber">
         <img src="/src/assets/card-logo.svg" alt="">
-        <p id="nbr">{{ item.cardNuber }}</p>
+        <p id="nbr">{{ item.cardNumber }}</p>
         <div class="user">
           <p>{{ item.name }}</p>
           <p>{{ item.month }} / {{ item.year }}</p>
@@ -20,7 +20,7 @@
         <input type="text" v-model="mesDonnees.data.name" placeholder="e.g. Jane Appleseed">
         
         <label for="">Card Number</label>
-        <input type="number" v-model="mesDonnees.data.cardNuber" placeholder="e.g. 1234 5678 9123 0000">
+        <input type="number" v-model="mesDonnees.data.cardNumber" placeholder="e.g. 1234 5678 9123 0000">
         <div class="erro_msg">{{ mesDonnees.invalableCardN }}</div>
         
         <div class="date_section">
@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { useDataStore } from "../store/data";
+import { useDataStore } from "../store/data.ts";
 
 const mesDonnees = useDataStore();
 const router = useRouter();
