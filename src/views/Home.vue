@@ -20,20 +20,20 @@
         <input type="text" v-model="mesDonnees.data.name" placeholder="e.g. Jane Appleseed">
         
         <label for="">Card Number</label>
-        <input type="number" v-model="mesDonnees.data.cardNumber" placeholder="e.g. 1234 5678 9123 0000">
+        <input type="text" v-model="mesDonnees.data.cardNumber" placeholder="e.g. 1234 5678 9123 0000" />
         <div class="erro_msg">{{ mesDonnees.invalableCardN }}</div>
         
         <div class="date_section">
           <div class="date">
             <label for=""> Exp. Date (MM/YY)</label>
             <div class="inp_date">
-              <input type="number" v-model="mesDonnees.data.month" placeholder="MM">
-              <input type="number" v-model="mesDonnees.data.year" placeholder="YY">
+              <input type="text" v-model="mesDonnees.data.month" placeholder="MM">
+              <input type="text" v-model="mesDonnees.data.year" placeholder="YY">
             </div>
           </div>
           <div class="cv_section">
             <label for="">CVC</label>
-            <input type="number" v-model="mesDonnees.data.cvc" placeholder="e.g. 123">
+            <input type="text" v-model="mesDonnees.data.cvc" placeholder="e.g. 123">
           </div>
         </div>
         

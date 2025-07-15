@@ -3,7 +3,7 @@
         <div class="lateral_bar">
             <div class="info_card" v-for="item in mesDonnees.userTab">
                 <img src="/src/assets/card-logo.svg" alt="">
-                <p id="nbr">{{ item.cardNumber }}</p>
+                <p id="nbr">{{ formatCardNumber(item.cardNumber) }}</p>
                 <div class="user">
                     <p>{{ item.name }}</p>
                     <p>{{ item.month }} / {{ item.year }}</p>
@@ -28,6 +28,10 @@
 <script setup lang="ts">
 import { useDataStore } from "../store/data.ts";
 const mesDonnees = useDataStore()
+function formatCardNumber(num: string): string {
+  return num.replace(/\s+/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
+}
+
 /* const resetForm = () => {
   mesDonnees.data.name = "";
   mesDonnees.data.cardNumber = "";
