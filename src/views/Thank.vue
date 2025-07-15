@@ -29,7 +29,7 @@
 import { useDataStore } from "../store/data.ts";
 const mesDonnees = useDataStore()
 function formatCardNumber(num: string): string {
-  return num.replace(/\s+/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
+  return num.replace(/\s+/g, "").replace(/(\d{4})(?=\d)/g, "$1    ");
 }
 
 /* const resetForm = () => {
@@ -97,7 +97,6 @@ function formatCardNumber(num: string): string {
 
 #nbr {
     font-size: 20px;
-    letter-spacing: 5px;
 }
 
 .card_back {

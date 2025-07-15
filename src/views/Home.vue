@@ -4,39 +4,66 @@
       <div class="card_back" v-for="i in mesDonnees.userTab" :key="i.cvc">
         <span>{{ i.cvc }}</span>
       </div>
-      <div class="info_card" v-for="item in mesDonnees.userTab" :key="item.cardNumber">
-        <img src="/src/assets/card-logo.svg" alt="">
-        <p id="nbr">{{ item.cardNumber }}</p>
+      <div
+        class="info_card"
+        v-for="item in mesDonnees.userTab"
+        :key="item.cardNumber"
+      >
+        <img src="/src/assets/card-logo.svg" alt="" />
+        <p id="nbr">{{ formatCardNumber(item.cardNumber) }}</p>
         <div class="user">
           <p>{{ item.name }}</p>
           <p>{{ item.month }} / {{ item.year }}</p>
         </div>
       </div>
     </div>
-    
+
     <div class="form_section">
       <form @submit.prevent="submitForm">
         <label for="">Cardholder Name</label>
-        <input type="text" v-model="mesDonnees.data.name" placeholder="e.g. Jane Appleseed">
-        
+        <input
+          type="text"
+          v-model="mesDonnees.data.name"
+          placeholder="e.g. Jane Appleseed"
+        />
+
         <label for="">Card Number</label>
-        <input type="text" v-model="mesDonnees.data.cardNumber" placeholder="e.g. 1234 5678 9123 0000" />
+        <input
+          type="text"
+          v-model="mesDonnees.data.cardNumber"
+          placeholder="e.g. 1234 5678 9123 0000"
+          maxlength="19"
+          inputmode="numeric"
+          @input="handleCardInput"
+        />
         <div class="erro_msg">{{ mesDonnees.invalableCardN }}</div>
-        
+
         <div class="date_section">
           <div class="date">
             <label for=""> Exp. Date (MM/YY)</label>
             <div class="inp_date">
-              <input type="text" v-model="mesDonnees.data.month" placeholder="MM">
-              <input type="text" v-model="mesDonnees.data.year" placeholder="YY">
+              <input
+                type="text"
+                v-model="mesDonnees.data.month"
+                placeholder="MM"
+              />
+              <input
+                type="text"
+                v-model="mesDonnees.data.year"
+                placeholder="YY"
+              />
             </div>
           </div>
           <div class="cv_section">
             <label for="">CVC</label>
-            <input type="text" v-model="mesDonnees.data.cvc" placeholder="e.g. 123">
+            <input
+              type="text"
+              v-model="mesDonnees.data.cvc"
+              placeholder="e.g. 123"
+            />
           </div>
         </div>
-        
+
         <div class="erro_msg">{{ mesDonnees.blankCard }}</div>
         <button type="submit">Confirm</button>
       </form>
@@ -45,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 import { useDataStore } from "../store/data.ts";
 
 const mesDonnees = useDataStore();
@@ -55,9 +82,20 @@ const submitForm = () => {
   mesDonnees.confirm();
 
   if (!mesDonnees.blankCard && !mesDonnees.invalableCardN) {
-    router.push('/thank');
+    router.push("/thank");
   }
 };
+function formatCardNumber(num: string): string {
+  return num.replace(/\s+/g, "").replace(/(\d{4})(?=\d)/g, "$1    ");
+}
+function handleCardInput(event: Event) {
+  const input = event.target as HTMLInputElement;
+  // Supprimer tout sauf les chiffres
+  let value = input.value.replace(/\D/g, "").slice(0, 16);
+  // Ajouter des espaces tous les 4 chiffres
+  value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
+  mesDonnees.data.cardNumber = value;
+}
 
 </script>
 
@@ -117,7 +155,6 @@ const submitForm = () => {
 
 #nbr {
   font-size: 20px;
-  letter-spacing: 5px;
 }
 
 .card_back {

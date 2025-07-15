@@ -36,9 +36,12 @@ export const useDataStore = defineStore("myStore", () => {
       data.value.cvc === ""
     ) {
       blankCard.value = "Veuillez remplir tous les champs.";
-    } else if (!/^\d+$/.test(data.value.cardNumber)) {
+    } /* else if (!/^\d+$/.test(data.value.cardNumber)) {
       invalableCardN.value =
         "Format incorrect : uniquement des chiffres sont autorisés pour le numéro de carte.";
+    } */ else if (data.value.cardNumber.replace(/\s+/g, "").length !== 16) {
+      invalableCardN.value =
+        "Le numéro de carte doit contenir exactement 16 chiffres.";
     } else {
       userTab.value.push({ ...data.value }); // Ajout d'une copie des données
       blankCard.value = "";
